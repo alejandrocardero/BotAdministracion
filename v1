@@ -1,0 +1,25 @@
+# main.py
+
+from utils.db_manager import setup_database
+from dotenv import load_dotenv
+import os
+
+# Cargar variables de entorno (para el debug)
+load_dotenv() 
+TEST_URL = os.getenv("DATABASE_URL")
+TEST_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+
+# LINEAS DE DEBUG - DEBES VER ESTO IMPRESO EN LA TERMINAL
+print(f"DEBUG: URL cargada? {'SÍ' if TEST_URL else 'NO'}")
+print(f"DEBUG: Token cargado? {'SÍ' if TEST_TOKEN else 'NO'}")
+print("-" * 30)
+
+if __name__ == '__main__':
+    print("Iniciando Verificación de Backend...")
+    
+    # Llama a la función de prueba de la DB
+    if setup_database():
+        print("CONEXIÓN EXITOSA A NEON.TECH. La DB está lista. ¡Podemos empezar a programar el bot!")
+        
+    else:
+        print("Fallo crítico: No se pudo conectar a la Base de Datos. Deteniendo la aplicación.")
